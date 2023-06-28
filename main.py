@@ -17,6 +17,8 @@ number_turtle = int(screen.textinput(title="Number of Turtle's", prompt="How man
 def race_start():
     factor = (Y - 50) / number_turtle
     value = -((number_turtle-1) * factor) / 2
+    bet = int(screen.textinput(title="Place your bet!", prompt="Which turtle will win the race, enter a number starting from top."))
+
     for _ in range(number_turtle):
         timmy = Turtle(shape="turtle")
         color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
@@ -25,12 +27,11 @@ def race_start():
         timmy.setpos(x=(-X/2)+20, y=value)
         value += factor
 
-    bet = int(screen.textinput(title="Place your bet!", prompt="Which turtle will win the race, enter a number starting from top."))
-
-    if bet:
-        race = True
-
-    if timmy.xcor() > (X/2)-20:
+        if timmy.xcor() > ((X/2)-20):
+            print(timmy.color())
+        else:
+            rand_distance = random.randint(0, 10)
+            timmy.forward(rand_distance)
 
 race_start()
 screen.exitonclick()
