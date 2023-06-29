@@ -14,10 +14,10 @@ Y = height
 
 number_turtle = int(screen.textinput(title="Number of Turtle's", prompt="How many Turtle are in the race?"))
 
+
 def race_start():
     factor = (Y - 50) / number_turtle
     value = -((number_turtle-1) * factor) / 2
-    bet = int(screen.textinput(title="Place your bet!", prompt="Which turtle will win the race, enter a number starting from top."))
 
     for _ in range(number_turtle):
         timmy = Turtle(shape="turtle")
@@ -27,30 +27,24 @@ def race_start():
         timmy.setpos(x=(-X/2)+20, y=value)
         value += factor
 
-        if timmy.xcor() > ((X/2)-20):
-            print(timmy.color())
+    my_turtles = screen.turtles()
+    bet = int(screen.textinput(title="Place your bet!", prompt="Which turtle will win the race, enter a number starting from bottom."))
+
+    winner = False
+
+    while not winner:
+        current_turtle = random.randint(0, number_turtle-1)
+        if my_turtles[current_turtle].xcor() >= ((X/2)-20):
+            winner = True
+            if (current_turtle+1) == bet:
+                print("Yaay 🎆 your turtle won the race!!")
+                screen.bye()
+            else:
+                print("On no your turtle lost 😔")
+                screen.bye()
         else:
             rand_distance = random.randint(0, 10)
-            timmy.forward(rand_distance)
+            my_turtles[current_turtle].forward(rand_distance)
+
 
 race_start()
-screen.exitonclick()
-
-
-
-
-
-# while is_race_on:
-    # for turtle in all_turtles:
-    #     #230 is 250 - half the width of the turtle.
-    #     if turtle.xcor() > 230:
-    #         is_race_on = False
-    #         winning_color = turtle.pencolor()
-    #         if winning_color == bet:
-    #             print(f"You've won! The {winning_color} turtle is the winner!")
-    #         else:
-    #             print(f"You've lost! The {winning_color} turtle is the winner!")
-    #
-    #     #Make each turtle move a random amount.
-    #     rand_distance = random.randint(0, 10)
-    #     turtle.forward(rand_distance)
